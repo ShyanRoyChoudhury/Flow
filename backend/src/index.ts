@@ -3,16 +3,30 @@ import dotenv from 'dotenv'
 dotenv.config()
 import { agenda } from "./utils/agenda";
 import './jobs/sendMail';
+import {z} from "zod";
 const app = express();
 app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
-
+const emailObject = z.object({
+    time: z.string(),
+    text: z.string(),
+    subject: z.string(),
+    to: z.string().array()
+})
 
 app.post('/email-scheduler', async (req: Request, res: Response)=>{
+    const parsedInput = emailObject.safeParse(req.body);
+    if(!parsedInput.success){
+        return res.status(400).json({
+            message: parsedInput.error
+        })
+    }
     const {time ,text, subject, to} = req.body;
     await agenda.schedule(`in ${time}`, 'send-email', { text, subject, to})
-    res.json('Success')
+    res.json({
+        message: 'Success'
+    });
 })
 
 
