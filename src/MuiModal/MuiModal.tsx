@@ -1,11 +1,11 @@
 import AddBlockModal from "@/Modals2/AddBlockModal";
 import isModalOpen from "@/store/isModalOpen";
-import { Modal, Box, Select, MenuItem, Button } from "@mui/material";
-import { useState } from "react";
+import { Modal, Box } from "@mui/material";
+
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useRecoilValue } from "recoil";
 import activeNodeType from "@/store/activeNodeType";
-import TestBlockModal from "@/Modals2/LeadSourceModal";
+import SourceBlockModal from "@/Modals2/LeadSourceModal";
 
 function MuiModal() {
   const activeNode = useRecoilValue(activeNodeType);
@@ -21,7 +21,7 @@ function MuiModal() {
       case "SourceBlock":
         return (
           <div>
-            <TestBlockModal />
+            <SourceBlockModal />
           </div>
         );
       case "AddBlock":

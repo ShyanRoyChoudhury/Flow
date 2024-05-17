@@ -17,9 +17,9 @@ import activeNodeType from "@/store/activeNodeType";
 const initialNodes = [
   {
     id: "1",
+    type: "SourceBlock",
     position: { x: 100, y: 100 },
     data: {},
-    type: "LeadSource",
   },
   {
     id: "2",
@@ -31,12 +31,6 @@ const initialNodes = [
     id: "3",
     type: "AddBlock",
     position: { x: 150, y: 400 },
-    data: {},
-  },
-  {
-    id: "4",
-    type: "SourceBlock",
-    position: { x: 250, y: 400 },
     data: {},
   },
 ] satisfies Node[];
