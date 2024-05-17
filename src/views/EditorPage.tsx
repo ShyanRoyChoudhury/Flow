@@ -1,13 +1,11 @@
 import MuiModal from "@/MuiModal/MuiModal";
 import Button from "../components/Button";
 import VisualEditor from "../components/VisualEditor";
-import { useRecoilValue } from "recoil";
-import activeNodeType from "@/store/activeNodeType";
+
 // import isModalOpen from "@/store/isModalOpen";
 
 function EditorPage(): JSX.Element {
   // const [isModalOpen, setModalOpen] = useState(false);
-  const activeNode = useRecoilValue(activeNodeType);
 
   // const closeModal = () => {
   //   setModalOpen(false);
@@ -20,8 +18,9 @@ function EditorPage(): JSX.Element {
         <div className="flex justify-between px-2">
           <div className="w-1/2">
             <div>
-              <form>
-                <textarea className="resize-none text-3xl w-full" />
+              <form className="flex">
+                <textarea className="resize-none text-3xl w-full" rows={1} />
+                <PencilSVG />
               </form>
               <div>Click on a block to configure and add it in sequence.</div>
             </div>
@@ -40,9 +39,25 @@ function EditorPage(): JSX.Element {
 
         <VisualEditor />
       </div>
-      <MuiModal nodeType={activeNode} />
+      <MuiModal />
     </div>
   );
 }
-
+function PencilSVG() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#000000"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
+    </svg>
+  );
+}
 export default EditorPage;

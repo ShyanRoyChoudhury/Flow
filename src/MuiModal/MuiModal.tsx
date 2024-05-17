@@ -1,25 +1,37 @@
-import activeNodeType from "@/store/activeNodeType";
+import AddBlockModal from "@/Modals2/AddBlockModal";
 import isModalOpen from "@/store/isModalOpen";
 import { Modal, Box, Select, MenuItem, Button } from "@mui/material";
 import { useState } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
+import activeNodeType from "@/store/activeNodeType";
+import TestBlockModal from "@/Modals2/LeadSourceModal";
 
-function MuiModal({ nodeType }: { nodeType: string | undefined }) {
-  const [selectedOption, setSelectedOption] = useState("");
+function MuiModal() {
+  const activeNode = useRecoilValue(activeNodeType);
+  //   const [selectedOption, setSelectedOption] = useState("");
   const [modalOpen, setModalOpen] = useRecoilState(isModalOpen);
   const setActiveNodeType = useSetRecoilState(activeNodeType);
-  const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+  //   const handleOptionChange = (event) => {
+  //     setSelectedOption(event.target.value);
+  //   };
 
   const renderContent = () => {
-    switch (selectedOption) {
-      case "option1":
-        return <div>Option 1 Content2 for {nodeType}</div>;
-      case "option2":
-        return <div>Option 2 Content for {nodeType}</div>;
+    switch (activeNode) {
+      case "SourceBlock":
+        return (
+          <div>
+            <TestBlockModal />
+          </div>
+        );
+      case "AddBlock":
+        return (
+          <div>
+            <AddBlockModal />
+          </div>
+        );
       default:
-        return <div>Select an option</div>;
+        return <div>Default</div>;
     }
   };
   const closeModal = () => {
@@ -28,18 +40,25 @@ function MuiModal({ nodeType }: { nodeType: string | undefined }) {
   };
 
   return (
-    <Modal open={modalOpen} onClose={closeModal}>
+    <Modal
+      open={modalOpen}
+      onClose={closeModal}
+      className=" bg-black bg-opacity-50 flex justify-center items-center"
+    >
       <Box
-        sx={{
-          width: 400,
-          padding: 2,
-          backgroundColor: "white",
-          margin: "auto",
-          marginTop: "10%",
-        }}
+        className="rounded-xl shadow p-6 transition-all  
+          w-5/6 xl:w-4/6 py-8 h-5/6 bg-[#F2F2F2] relative"
       >
-        <h2>{nodeType} Modal</h2>
-        <Select
+        <button
+          className="absolute top-2 right-2 p-[0.5px] px-2 
+        rounded-sm  border-red-600 text-red-600 border-[3px]  hover:text-red-400 
+        hover:border-red-400 transition-colors"
+          onClick={closeModal}
+        >
+          X
+        </button>
+        <div className="border-b-2 w-full p-2 "></div>
+        {/* <Select
           value={selectedOption}
           onChange={handleOptionChange}
           displayEmpty
@@ -49,9 +68,8 @@ function MuiModal({ nodeType }: { nodeType: string | undefined }) {
           </MenuItem>
           <MenuItem value="option1">Option 1</MenuItem>
           <MenuItem value="option2">Option 2</MenuItem>
-        </Select>
+        </Select> */}
         <div>{renderContent()}</div>
-        <Button onClick={closeModal}>Close</Button>
       </Box>
     </Modal>
   );

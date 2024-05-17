@@ -1,39 +1,36 @@
-// import Modal from "@/Modals/modal";
-import AddBlockModal from "@/Modals2/AddBlockModal";
-import Modal2 from "@/Modals2/modal2";
-import modalBlockSelected from "@/store/modalBlockSelected";
-import modalFlag from "@/store/modalFlag";
+// // import Modal from "@/Modals/modal";
+// import AddBlockModal from "@/Modals2/AddBlockModal";
+// import Modal2 from "@/Modals2/modal2";
+// import modalBlockSelected from "@/store/modalBlockSelected";
+// import modalFlag from "@/store/modalFlag";
 // import ModalBaseView from "@/views/ModalBaseViewPage";
 // import ModalPage from "@/views/ModalBaseViewPage";
 // import { useEffect } from "react";
 // import { useState } from "react";
 import { Handle, Position } from "reactflow";
-import { useSetRecoilState, useRecoilState } from "recoil";
+// import { useSetRecoilState, useRecoilState } from "recoil";
 
 function AddBlock(): React.ReactElement {
-  const setOpen = useSetRecoilState(modalFlag);
-  const [blockSelected, setModalBlockSelected] =
-    useRecoilState(modalBlockSelected);
-  const handleClick = () => {
-    setOpen(true);
-    setModalBlockSelected((prevBlockSelected) => ({
-      ...prevBlockSelected,
-      selected: true,
-      blockType: "add-block",
-    }));
-    console.log(blockSelected);
-  };
+  // const setOpen = useSetRecoilState(modalFlag);
+  // const [blockSelected, setModalBlockSelected] =
+  //   useRecoilState(modalBlockSelected);
+  // const handleClick = () => {
+  //   setOpen(true);
+  //   setModalBlockSelected((prevBlockSelected) => ({
+  //     ...prevBlockSelected,
+  //     selected: true,
+  //     blockType: "add-block",
+  //   }));
+  //   console.log(blockSelected);
+  // };
 
   return (
-    <div
-      className="border-2 border-[#05A6FF] shadow-sm  p-2 rounded-sm"
-      onClick={handleClick}
-    >
+    <div className="border-2 border-[#05A6FF] shadow-sm  p-2 rounded-sm">
       <Handle type="target" position={Position.Top} />
       <PlusSVG />
-      <Modal2>
+      {/* <Modal2>
         {blockSelected.blockType === "add-block" && <AddBlockModal />}
-      </Modal2>
+      </Modal2> */}
     </div>
   );
 }

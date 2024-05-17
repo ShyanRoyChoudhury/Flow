@@ -13,39 +13,6 @@ import "reactflow/dist/style.css";
 import { useSetRecoilState } from "recoil";
 import isModalOpen from "@/store/isModalOpen";
 import activeNodeType from "@/store/activeNodeType";
-// const initialNodes = [
-//   {
-//     id: "1",
-//     position: { x: 0, y: 0 },
-//     type: "DelayBlock",
-//   },
-//   {
-//     id: "2",
-//     data: { label: "World" },
-//     position: { x: 100, y: 100 },
-//   },
-//   {
-//     id: "3",
-//     type: "SequenceStart",
-//     position: { x: 100, y: 200 },
-//   },
-//   {
-//     id: "4",
-//     data: { label: "Source" },
-//     position: { x: 100, y: 300 },
-//     type: "SourceNode",
-//   },
-//   {
-//     id: "5",
-//     position: { x: 200, y: 300 },
-//     type: "EmailBlock",
-//   },
-//   {
-//     id: "6",
-//     position: { x: 300, y: 300 },
-//     type: "AddBlock",
-//   },
-// ] satisfies Node[];
 
 const initialNodes = [
   {
