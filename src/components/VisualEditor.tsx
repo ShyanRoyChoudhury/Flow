@@ -10,6 +10,9 @@ import {
 import { useState, useCallback } from "react";
 import nodeTypes from "../nodes";
 import "reactflow/dist/style.css";
+import { useSetRecoilState } from "recoil";
+import isModalOpen from "@/store/isModalOpen";
+import activeNodeType from "@/store/activeNodeType";
 // const initialNodes = [
 //   {
 //     id: "1",
@@ -78,7 +81,8 @@ const initialEdges = [
 function VisualEditor() {
   //   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   //   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-
+  const setModalOpen = useSetRecoilState(isModalOpen);
+  const setActiveNodeType = useSetRecoilState(activeNodeType);
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
   const onNodesChange = useCallback(
@@ -89,6 +93,12 @@ function VisualEditor() {
     (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     []
   );
+  const onNodeClick = (event: React.MouseEvent, node: Node) => {
+    console.log(node);
+    setActiveNodeType(node.type);
+    setModalOpen(true);
+  };
+
   return (
     <div
       style={{ height: "80vh", width: "100%" }}
@@ -98,6 +108,7 @@ function VisualEditor() {
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
+        onNodeClick={onNodeClick}
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
         style={{

@@ -8,8 +8,8 @@ import { PositionLoggerNode } from "./PositionLogger";
 import SourceBlock2 from "./SourceBlock2";
 import SourceBlock from "./SourceBlock";
 const nodeTypes = {
-  LeadSource: SourceBlock2,
-  LeadSource2: SourceBlock2,
+  // LeadSource: SourceBlock2,
+  // LeadSource2: SourceBlock2,
   SequenceStart: SequenceStartPoint,
   EmailBlock: EmailBlock,
   DelayBlock: DelayBlock,

@@ -1,7 +1,7 @@
 // import Modal from "@/Modals/modal";
 
-import TestBlockModal from "@/Modals2/LeadSourceModal";
-import Modal2 from "@/Modals2/modal2";
+// import TestBlockModal from "@/Modals2/LeadSourceModal";
+// import Modal2 from "@/Modals2/modal2";
 import modalBlockSelected from "@/store/modalBlockSelected";
 import modalFlag from "@/store/modalFlag";
 // import ModalBaseView from "@/views/ModalBaseViewPage";
@@ -40,9 +40,9 @@ function SourceBlock(): React.ReactElement {
         </div>
       </div>
 
-      <Modal2>
+      {/* <Modal2>
         {blockSelected.blockType === "test-block" && <TestBlockModal />}
-      </Modal2>
+      </Modal2> */}
     </div>
   );
 }
