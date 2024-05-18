@@ -1,12 +1,14 @@
 import Button from "@/components/Button";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
+import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 function ModalDelay() {
   const [waitTime, setWaitTime] = useState("");
   const [waitTypeSelected, setWaitTypeSelected] = useState<string | null>("");
   const addNewNode = useRecoilValue(addNewNodeFunction);
+  const setSubBlockSelected = useSetRecoilState(modalSubBlockSelected);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWaitTime(e.target.value);
@@ -19,6 +21,7 @@ function ModalDelay() {
       console.log("Please fill in all fields before inserting.");
     } else {
       addNewNode("DelayBlock");
+      setSubBlockSelected(null);
     }
   };
   return (

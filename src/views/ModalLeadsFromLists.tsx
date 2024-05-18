@@ -1,15 +1,17 @@
 import { PlusSVG } from "@/SVGs/SVG";
 import Button from "@/components/Button";
+import activeNodeType from "@/store/activeNodeType";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
 import { MenuItem, Select } from "@mui/material";
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 function ModalLeadsFromLists() {
   const [templateSelected, setTemplateSelected] = useState<string | null>("");
   const handleSelect = (e) => {
     setTemplateSelected(e.target.value);
   };
   const addNewNode = useRecoilValue(addNewNodeFunction);
+  const setActiveNodeType = useSetRecoilState(activeNodeType);
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
@@ -43,7 +45,10 @@ function ModalLeadsFromLists() {
           <div className="w-full flex justify-end">
             <Button
               className="border-[#9CBAF8] px-4 py-2 border-2 bg-[#0066FF] text-white font-semibold"
-              onClick={() => addNewNode("LeadsFromList")}
+              onClick={() => {
+                addNewNode("LeadsFromList");
+                setActiveNodeType(null);
+              }}
             >
               Insert
             </Button>

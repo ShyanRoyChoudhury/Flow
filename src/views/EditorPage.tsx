@@ -4,15 +4,7 @@ import VisualEditor from "../components/VisualEditor";
 import { CrossSVG, PencilSVG, TickSVG } from "@/SVGs/SVG";
 import { useState } from "react";
 
-// import isModalOpen from "@/store/isModalOpen";
-
 function EditorPage(): JSX.Element {
-  // const [isModalOpen, setModalOpen] = useState(false);
-
-  // const closeModal = () => {
-  //   setModalOpen(false);
-  //   setActiveNodeType("");
-  // };
   const [sequenceName, setSequenceName] = useState<string>("Test Sequence");
   const [isTextBoxActive, setIsTextBoxActive] = useState<boolean>(false);
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

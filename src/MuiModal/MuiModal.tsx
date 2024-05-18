@@ -50,11 +50,6 @@ function MuiModal() {
             <ModalLeadsFromLists />
           </div>
         );
-        return (
-          <div>
-            <ModalDelay />
-          </div>
-        );
       default:
         return <div>Default</div>;
     }

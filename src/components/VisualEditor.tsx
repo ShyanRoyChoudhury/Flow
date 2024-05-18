@@ -12,26 +12,26 @@ import addNewNodeFunction from "@/store/addNewNodeFunction";
 const initialNodes = [
   {
     id: "1",
+    type: "AddBlock",
+    position: { x: 150, y: 400 },
+    data: {},
+  },
+  {
+    id: "2",
     type: "SourceBlock",
     position: { x: 100, y: 100 },
     data: {},
   },
   {
-    id: "2",
+    id: "3",
     type: "SequenceStart",
     position: { x: 100, y: 300 },
-    data: {},
-  },
-  {
-    id: "3",
-    type: "AddBlock",
-    position: { x: 150, y: 400 },
     data: {},
   },
 ] satisfies Node[];
 
 const initialEdges = [
-  { id: "testedge", type: "step", source: "2", target: "3" },
+  // { id: "testedge", type: "step", source: "2", target: "3" },
 ];
 function VisualEditor() {
   const setModalOpen = useSetRecoilState(isModalOpen);
@@ -70,7 +70,6 @@ function VisualEditor() {
           },
           type: nodeType,
         };
-        console.log("inside addNewNode");
 
         const updatedAddLeadSourceNode = {
           ...activeNode,
@@ -88,6 +87,22 @@ function VisualEditor() {
             .concat(newNode)
         );
 
+        let lastNodeId;
+        if (activeNode.id === "2") {
+          lastNodeId = "3";
+        } else {
+          lastNodeId = nodes[nodes.length - 1].id;
+        }
+
+        setEdges((eds) => [
+          ...eds,
+          {
+            id: `edge-${activeNode.id}-${newNodeId}`,
+            source: lastNodeId.toString(),
+            target: newNodeId,
+            type: "step",
+          },
+        ]);
         setModalOpen(false); // Close modal after adding node
       }
     },
