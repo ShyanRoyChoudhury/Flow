@@ -1,6 +1,7 @@
 import BlockSelector from "@/components/BlockSelector";
 import { sourceBlockViews } from "@/nodes";
 import modalBlockSelected from "@/store/modalBlockSelected";
+import ModalDelay from "@/views/ModalDelay";
 import ModalLeadsFromLists from "@/views/ModalLeadsFromLists";
 // import ModalBaseView from "@/views/ModalBaseViewPage";
 import { useRecoilValue } from "recoil";
@@ -20,6 +21,12 @@ function LeadSourceModal() {
         return <ComponentForSegmentOfList />;
       case "Lead from CRM Integration":
         return <ComponentForLeadFromCRMIntegration />;
+      case "Wait":
+        return (
+          <div>
+            <ModalDelay />
+          </div>
+        );
       default:
         return null;
     }

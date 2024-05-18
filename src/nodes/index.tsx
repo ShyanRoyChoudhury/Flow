@@ -3,20 +3,31 @@ import AddBlock from "./AddBlock";
 import DelayBlock from "./DelayBlock";
 import EmailBlock from "./EmailBlock";
 import SequenceStartPoint from "./SequenceStartPoint";
-// import SourceBlock from "./SourceBlock";
 import { PositionLoggerNode } from "./PositionLogger";
-import SourceBlock2 from "./SourceBlock2";
 import SourceBlock from "./SourceBlock";
-import { AddUser, TaskSVG, ThunderSVG, TickUser, UserGroup } from "@/SVGs/SVG";
+import {
+  AddUser,
+  ArchieveSVG,
+  FunnelSVG,
+  HourglassSVG,
+  PauseSVG,
+  TaskSVG,
+  ThunderSVG,
+  TickUser,
+  UserGroup,
+} from "@/SVGs/SVG";
+import LeadsFromListBlock from "./LeadsFromListBlock";
+import EndSequenceBlock from "./EndSequenceBlock";
+
 const nodeTypes = {
-  // LeadSource: SourceBlock2,
-  // LeadSource2: SourceBlock2,
   SequenceStart: SequenceStartPoint,
   EmailBlock: EmailBlock,
   DelayBlock: DelayBlock,
   AddBlock: AddBlock,
   SourceBlock: SourceBlock,
   "position-logger": PositionLoggerNode,
+  LeadsFromList: LeadsFromListBlock,
+  EndSequenceBlock: EndSequenceBlock,
 } satisfies NodeTypes;
 
 export const sourceBlockViews = [
@@ -56,6 +67,31 @@ export const outreachBlockViews = [
   },
 ];
 
+export const conditionBlockViews = [
+  {
+    title: "Wait",
+    icon: <HourglassSVG />,
+    description: "Add a delay between blocks.",
+  },
+  {
+    title: "If/Else (Rules)",
+    icon: <FunnelSVG />,
+    description: "Route leads through the sequence based on events.",
+  },
+];
+
+export const actionBlockViews = [
+  {
+    title: "End Sequence",
+    icon: <PauseSVG />,
+    description: "End sequence for a lead.",
+  },
+  {
+    title: "Archieve Lead",
+    icon: <ArchieveSVG />,
+    description: "Archieve Lead from list.",
+  },
+];
 export function EmailSVG() {
   return (
     <svg

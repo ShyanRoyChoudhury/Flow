@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 const addNewNodeFunction = atom({
     key: 'addNewNodeFunction',
-    default: ()=> {}
+    default: (nodeType)=> {}
 })
 
 export default addNewNodeFunction;

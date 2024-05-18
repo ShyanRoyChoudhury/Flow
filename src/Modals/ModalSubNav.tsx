@@ -3,6 +3,7 @@ import ModalLeadsFromLists from "@/views/ModalLeadsFromLists";
 import { useRecoilValue } from "recoil";
 import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
 import ModalColdEmail from "@/views/ModalColdEmail";
+import ModalDelay from "@/views/ModalDelay";
 
 function ModalSubNav() {
   const subBlockSelected = useRecoilValue(modalSubBlockSelected);
@@ -20,6 +21,12 @@ function ModalSubNav() {
         return (
           <div>
             <ModalColdEmail />
+          </div>
+        );
+      case "Wait":
+        return (
+          <div>
+            <ModalDelay />
           </div>
         );
       default:

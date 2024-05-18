@@ -50,7 +50,7 @@ function ModalColdEmail() {
           <div className="w-full flex justify-end">
             <Button
               className="border-[#9CBAF8] px-4 py-2 border-2 bg-[#0066FF] text-white font-semibold"
-              onClick={addNewNode}
+              onClick={() => addNewNode("EmailBlock")}
             >
               Insert
             </Button>

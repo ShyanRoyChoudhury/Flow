@@ -7,7 +7,7 @@ function EmailBlock(): React.ReactElement {
     <Node icon={<EmailSVG />} label="Email" color="text-[#8929E0]">
       <Handle type="source" position={Position.Top} />
       <Handle type="target" position={Position.Bottom} />
-      <div>Template</div>
+      <div className="text-[#8929E0]">Template</div>
     </Node>
   );
 }

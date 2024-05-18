@@ -13,7 +13,7 @@ function EditorPage(): JSX.Element {
   //   setModalOpen(false);
   //   setActiveNodeType("");
   // };
-  const [sequenceName, setSequenceName] = useState<string>("");
+  const [sequenceName, setSequenceName] = useState<string>("Test Sequence");
   const [isTextBoxActive, setIsTextBoxActive] = useState<boolean>(false);
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSequenceName(e.target.value);

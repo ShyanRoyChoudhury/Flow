@@ -8,6 +8,8 @@ import activeNodeType from "@/store/activeNodeType";
 import SourceBlockModal from "@/Modals2/LeadSourceModal";
 import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
 import ModalSubNav from "@/Modals/ModalSubNav";
+import ModalDelay from "@/views/ModalDelay";
+import ModalLeadsFromLists from "@/views/ModalLeadsFromLists";
 
 function MuiModal() {
   const activeNode = useRecoilValue(activeNodeType);
@@ -34,6 +36,23 @@ function MuiModal() {
         return (
           <div>
             <AddBlockModal />
+          </div>
+        );
+      case "DelayBlock":
+        return (
+          <div>
+            <ModalDelay />
+          </div>
+        );
+      case "LeadsFromList":
+        return (
+          <div>
+            <ModalLeadsFromLists />
+          </div>
+        );
+        return (
+          <div>
+            <ModalDelay />
           </div>
         );
       default:
