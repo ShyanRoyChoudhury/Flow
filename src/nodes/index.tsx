@@ -5,17 +5,7 @@ import EmailBlock from "./EmailBlock";
 import SequenceStartPoint from "./SequenceStartPoint";
 import { PositionLoggerNode } from "./PositionLogger";
 import SourceBlock from "./SourceBlock";
-import {
-  AddUser,
-  ArchieveSVG,
-  FunnelSVG,
-  HourglassSVG,
-  PauseSVG,
-  TaskSVG,
-  ThunderSVG,
-  TickUser,
-  UserGroup,
-} from "@/SVGs/SVG";
+
 import LeadsFromListBlock from "./LeadsFromListBlock";
 import EndSequenceBlock from "./EndSequenceBlock";
 
@@ -29,86 +19,5 @@ const nodeTypes = {
   LeadsFromList: LeadsFromListBlock,
   EndSequenceBlock: EndSequenceBlock,
 } satisfies NodeTypes;
-
-export const sourceBlockViews = [
-  {
-    title: "Leads from List(s)",
-    icon: <AddUser />,
-    description: "Connect multiple lists as source for this sequence.",
-  },
-  {
-    title: "Segment by Events",
-    icon: <TickUser />,
-    description:
-      "Create a segment of leads who have engaged with emails previously.",
-  },
-  {
-    title: "Segment of List",
-    icon: <UserGroup />,
-    description: "Create a segment of leads which match SalesBlink Variables.",
-  },
-  {
-    title: "Lead from CRM Integration",
-    icon: <ThunderSVG />,
-    description: "Pulls leads from your CRM integrations.",
-  },
-];
-
-export const outreachBlockViews = [
-  {
-    title: "Cold Email",
-    icon: <EmailSVG />,
-    description: "Send an email to a lead.",
-  },
-  {
-    title: "Task",
-    icon: <TaskSVG />,
-    description: "Schedule a manual task.",
-  },
-];
-
-export const conditionBlockViews = [
-  {
-    title: "Wait",
-    icon: <HourglassSVG />,
-    description: "Add a delay between blocks.",
-  },
-  {
-    title: "If/Else (Rules)",
-    icon: <FunnelSVG />,
-    description: "Route leads through the sequence based on events.",
-  },
-];
-
-export const actionBlockViews = [
-  {
-    title: "End Sequence",
-    icon: <PauseSVG />,
-    description: "End sequence for a lead.",
-  },
-  {
-    title: "Archieve Lead",
-    icon: <ArchieveSVG />,
-    description: "Archieve Lead from list.",
-  },
-];
-export function EmailSVG() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="#000000"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-      <polyline points="22,6 12,13 2,6"></polyline>
-    </svg>
-  );
-}
 
 export default nodeTypes;

@@ -50,7 +50,7 @@ function VisualEditor() {
     (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     []
   );
-  const onNodeClick = (event: React.MouseEvent, node: Node) => {
+  const onNodeClick = (_event: React.MouseEvent, node: Node) => {
     console.log(node);
     setActiveNodeType(node);
     setModalOpen(true);

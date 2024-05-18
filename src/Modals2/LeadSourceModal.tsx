@@ -1,6 +1,6 @@
 import { QuestionSVG } from "@/SVGs/SVG";
 import BlockSelector from "@/components/BlockSelector";
-import { sourceBlockViews } from "@/nodes";
+import { sourceBlockViews } from "@/lib/sourceBlockViews";
 
 function SourceBlockModal() {
   return (

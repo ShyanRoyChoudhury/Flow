@@ -1,10 +1,8 @@
 import { QuestionSVG } from "@/SVGs/SVG";
 import BlockSelector from "@/components/BlockSelector";
-import {
-  actionBlockViews,
-  conditionBlockViews,
-  outreachBlockViews,
-} from "@/nodes";
+import { actionBlockViews } from "@/lib/actionBlockViews";
+import { conditionBlockViews } from "@/lib/conditionBlockViews";
+import { outreachBlockViews } from "@/lib/outreachBlockViews";
 
 function AddBlockModal() {
   return (
