@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
-import { MenuItem, Select } from "@mui/material";
+import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 function ModalDelay() {
@@ -11,7 +11,7 @@ function ModalDelay() {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWaitTime(e.target.value);
   };
-  const handleSelect = (e) => {
+  const handleSelect = (e: SelectChangeEvent<string | null>) => {
     setWaitTypeSelected(e.target.value);
   };
   const handleInsertClick = () => {

@@ -1,17 +1,13 @@
 import { BaseEdge, EdgeProps, getStraightPath } from "reactflow";
 
-export default function CustomAddEdge({
-  id,
-  sourceX,
-  sourceY,
-  targetX,
-  targetY,
-}: EdgeProps) {
+export default function CustomAddEdge({ id, sourceX, sourceY }: EdgeProps) {
+  const customTargetX = sourceX;
+  const customTargetY = sourceY + 150;
   const [edgePath] = getStraightPath({
     sourceX,
     sourceY,
-    targetX,
-    targetY,
+    targetX: customTargetX,
+    targetY: customTargetY,
   });
 
   return (

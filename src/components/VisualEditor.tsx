@@ -2,6 +2,7 @@ import ReactFlow, { MiniMap, Node } from "reactflow";
 import { Controls, applyNodeChanges, applyEdgeChanges } from "reactflow";
 import { useState, useCallback, useEffect } from "react";
 import nodeTypes from "../nodes";
+import edgeTypes from "@/edges";
 import "reactflow/dist/style.css";
 import { useSetRecoilState, useRecoilState } from "recoil";
 import isModalOpen from "@/store/isModalOpen";
@@ -27,26 +28,25 @@ const initialNodes = [
     position: { x: 150, y: 400 },
     data: {},
   },
-  {
-    id: "4",
-    type: "EndSequenceBlock",
-    position: { x: 250, y: 400 },
-    data: {},
-  },
 ] satisfies Node[];
 
+const initialEdges = [
+  { id: "testedge", type: "step", source: "2", target: "3" },
+];
 function VisualEditor() {
   const setModalOpen = useSetRecoilState(isModalOpen);
   const [activeNode, setActiveNodeType] = useRecoilState(activeNodeType);
   const setAddNewNodeFunction = useSetRecoilState(addNewNodeFunction);
 
   const [nodes, setNodes] = useState(initialNodes);
-  const [, setEdges] = useState([]);
+  const [edges, setEdges] = useState(initialEdges);
   const onNodesChange = useCallback(
+    //@ts-expect-error typeerror to be fixed
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
     []
   );
   const onEdgesChange = useCallback(
+    //@ts-expect-error typeerror to be fixed
     (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     []
   );
@@ -105,11 +105,12 @@ function VisualEditor() {
     >
       <ReactFlow
         nodes={nodes}
-        // edges={edges}
+        edges={edges}
         onNodesChange={onNodesChange}
         onNodeClick={onNodeClick}
         onEdgesChange={onEdgesChange}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         style={{
           background: "#f2f2f2",
         }}

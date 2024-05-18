@@ -1,12 +1,12 @@
 import { PencilSVG, PlusSVG } from "@/SVGs/SVG";
 import Button from "@/components/Button";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
-import { MenuItem, Select } from "@mui/material";
+import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
 function ModalColdEmail() {
   const [templateSelected, setTemplateSelected] = useState<string | null>("");
-  const handleSelect = (e) => {
+  const handleSelect = (e: SelectChangeEvent<string | null>) => {
     setTemplateSelected(e.target.value);
   };
   const addNewNode = useRecoilValue(addNewNodeFunction);
