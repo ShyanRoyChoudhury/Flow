@@ -1,22 +1,31 @@
 import Button from "@/components/Button";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
+import delayData from "@/store/delayData";
 import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+
 function ModalDelay() {
-  const [waitTime, setWaitTime] = useState("");
-  const [waitTypeSelected, setWaitTypeSelected] = useState<string | null>("");
+  const [formData, setFormData] = useRecoilState(delayData);
   const addNewNode = useRecoilValue(addNewNodeFunction);
   const setSubBlockSelected = useSetRecoilState(modalSubBlockSelected);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setWaitTime(e.target.value);
+    setFormData({
+      ...formData,
+      waitTime: e.target.value,
+    });
   };
+
   const handleSelect = (e: SelectChangeEvent<string | null>) => {
-    setWaitTypeSelected(e.target.value);
+    setFormData({
+      ...formData,
+      waitTypeSelected: e.target.value,
+    });
   };
+
   const handleInsertClick = () => {
+    const { waitTime, waitTypeSelected } = formData;
     if (!waitTime || !waitTypeSelected) {
       console.log("Please fill in all fields before inserting.");
     } else {
@@ -24,6 +33,7 @@ function ModalDelay() {
       setSubBlockSelected(null);
     }
   };
+
   return (
     <div className="space-y-2">
       <div className="space-y-2 px-2 py-6">
@@ -32,20 +42,21 @@ function ModalDelay() {
             <div>Wait For</div>
             <input
               type="number"
-              className="w-full p-2  shadow-sm hover:border-black border rounded-sm"
+              className="w-full p-2 shadow-sm hover:border-black border rounded-sm"
               onChange={handleInputChange}
+              value={formData.waitTime}
             />
           </div>
           <div>
             <label>Wait Type</label>
             <Select
-              value={waitTypeSelected}
+              value={formData.waitTypeSelected}
               className="w-full bg-whit bg-white"
               onChange={handleSelect}
             >
-              <MenuItem value="option1">minutes</MenuItem>
-              <MenuItem value="option1">hours</MenuItem>
-              <MenuItem value="option2">days</MenuItem>
+              <MenuItem value="minutes">minutes</MenuItem>
+              <MenuItem value="hours">hours</MenuItem>
+              <MenuItem value="days">days</MenuItem>
             </Select>
           </div>
         </form>

@@ -2,12 +2,12 @@ import { PlusSVG } from "@/SVGs/SVG";
 import Button from "@/components/Button";
 import activeNodeType from "@/store/activeNodeType";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
-import { MenuItem, Select } from "@mui/material";
+import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 function ModalLeadsFromLists() {
   const [templateSelected, setTemplateSelected] = useState<string | null>("");
-  const handleSelect = (e) => {
+  const handleSelect = (e: SelectChangeEvent<string | null>) => {
     setTemplateSelected(e.target.value);
   };
   const addNewNode = useRecoilValue(addNewNodeFunction);
@@ -34,12 +34,8 @@ function ModalLeadsFromLists() {
           className="w-full bg-white"
           onChange={handleSelect}
         >
-          <MenuItem value="Sample List" onClick={handleSelect}>
-            Sample List
-          </MenuItem>
-          <MenuItem value="option2" onClick={handleSelect}>
-            Option 2
-          </MenuItem>
+          <MenuItem value="Sample List">Sample List</MenuItem>
+          <MenuItem value="option2">Option 2</MenuItem>
         </Select>
         {templateSelected && (
           <div className="w-full flex justify-end">

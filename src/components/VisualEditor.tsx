@@ -1,4 +1,4 @@
-import ReactFlow, { MiniMap, Node } from "reactflow";
+import ReactFlow, { Edge, MiniMap, Node } from "reactflow";
 import { Controls, applyNodeChanges, applyEdgeChanges } from "reactflow";
 import { useState, useCallback, useEffect } from "react";
 import nodeTypes from "../nodes";
@@ -32,7 +32,7 @@ const initialNodes = [
 
 const initialEdges = [
   // { id: "testedge", type: "step", source: "2", target: "3" },
-];
+] satisfies Edge[];
 function VisualEditor() {
   const setModalOpen = useSetRecoilState(isModalOpen);
   const [activeNode, setActiveNodeType] = useRecoilState(activeNodeType);
@@ -93,7 +93,7 @@ function VisualEditor() {
         } else {
           lastNodeId = nodes[nodes.length - 1].id;
         }
-
+        //@ts-expect-error type error. requires fix
         setEdges((eds) => [
           ...eds,
           {
@@ -103,6 +103,7 @@ function VisualEditor() {
             type: "step",
           },
         ]);
+        console.log(nodes);
         setModalOpen(false); // Close modal after adding node
       }
     },

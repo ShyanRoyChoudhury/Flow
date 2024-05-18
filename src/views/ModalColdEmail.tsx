@@ -1,6 +1,5 @@
 import { PencilSVG, PlusSVG } from "@/SVGs/SVG";
 import Button from "@/components/Button";
-import activeNodeType from "@/store/activeNodeType";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
 import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";

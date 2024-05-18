@@ -4,3 +4,6 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+export const messageBody = 'Message body. TEST';
+export const subject = 'Test Subject';

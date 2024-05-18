@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
 import ModalColdEmail from "@/views/ModalColdEmail";
 import ModalDelay from "@/views/ModalDelay";
+import ModalEndSequence from "@/views/EndSequence";
 
 function ModalSubNav() {
   const subBlockSelected = useRecoilValue(modalSubBlockSelected);
@@ -29,11 +30,16 @@ function ModalSubNav() {
             <ModalDelay />
           </div>
         );
+      case "End Sequence":
+        return (
+          <div>
+            <ModalEndSequence />
+          </div>
+        );
       default:
-        return <div>Default</div>;
+        return <div>DefaultModalSubNav</div>;
     }
   };
-  console.log("subBlock:", subBlockSelected);
   return (
     <div className="space-y-2">
       <div className="p-8">

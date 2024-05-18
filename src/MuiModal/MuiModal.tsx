@@ -50,6 +50,7 @@ function MuiModal() {
             <ModalLeadsFromLists />
           </div>
         );
+
       default:
         return <div>Default</div>;
     }
