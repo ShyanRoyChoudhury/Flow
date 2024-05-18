@@ -6,18 +6,24 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { useRecoilValue } from "recoil";
 import activeNodeType from "@/store/activeNodeType";
 import SourceBlockModal from "@/Modals2/LeadSourceModal";
+import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
+import ModalSubNav from "@/Modals/ModalSubNav";
 
 function MuiModal() {
   const activeNode = useRecoilValue(activeNodeType);
   //   const [selectedOption, setSelectedOption] = useState("");
   const [modalOpen, setModalOpen] = useRecoilState(isModalOpen);
   const setActiveNodeType = useSetRecoilState(activeNodeType);
+  const setSubModalBlockSelected = useSetRecoilState(activeNodeType);
   //   const handleOptionChange = (event) => {
   //     setSelectedOption(event.target.value);
   //   };
+  const [subBlockSelected, setSubBlockSelected] = useRecoilState(
+    modalSubBlockSelected
+  );
 
   const renderContent = () => {
-    switch (activeNode) {
+    switch (activeNode?.type) {
       case "SourceBlock":
         return (
           <div>
@@ -36,7 +42,9 @@ function MuiModal() {
   };
   const closeModal = () => {
     setModalOpen(false);
-    setActiveNodeType("");
+    setActiveNodeType(null);
+    setSubModalBlockSelected(null);
+    setSubBlockSelected(null);
   };
 
   return (
@@ -51,25 +59,20 @@ function MuiModal() {
       >
         <button
           className="absolute top-2 right-2 p-[0.5px] px-2 
-        rounded-sm  border-red-600 text-red-600 border-[3px]  hover:text-red-400 
-        hover:border-red-400 transition-colors"
+          rounded-sm  border-red-600 text-red-600 border-[3px]  hover:text-red-400 
+          hover:border-red-400 transition-colors"
           onClick={closeModal}
         >
           X
         </button>
         <div className="border-b-2 w-full p-2 "></div>
-        {/* <Select
-          value={selectedOption}
-          onChange={handleOptionChange}
-          displayEmpty
-        >
-          <MenuItem value="" disabled>
-            Select an option
-          </MenuItem>
-          <MenuItem value="option1">Option 1</MenuItem>
-          <MenuItem value="option2">Option 2</MenuItem>
-        </Select> */}
-        <div>{renderContent()}</div>
+        {!subBlockSelected ? (
+          <div>
+            <div>{renderContent()}</div>
+          </div>
+        ) : (
+          <ModalSubNav />
+        )}
       </Box>
     </Modal>
   );

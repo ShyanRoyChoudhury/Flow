@@ -13,7 +13,6 @@ function SourceBlockModal() {
           </div>
         </div>
         <p className="text-sm text-gray-500">
-          {/* Click on a block to configure and add it in sequence. */}
           Pick a block & configure, any new leads that match rules will be added
           to sequence automatically.
         </p>

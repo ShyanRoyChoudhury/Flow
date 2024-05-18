@@ -53,7 +53,7 @@ function EditorPage(): JSX.Element {
           <div>
             <Button
               onClick={() => console.log("click")}
-              className="bg-blue-500 text-white flex space-x-1"
+              className="bg-blue-500 border-[#9CBAF8] border-2 text-white flex space-x-1"
             >
               <div>Save & Schedule</div>
               <div>|</div>

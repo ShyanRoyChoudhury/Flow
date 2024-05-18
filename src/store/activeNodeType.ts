@@ -1,8 +1,9 @@
+import { Node } from "reactflow";
 import { atom } from "recoil";
 
-const activeNodeType = atom<string | undefined>({
+const activeNodeType = atom<Node | null>({
     key:'activeNodeType',
-    default: ''
+    default: null
 });
 
 export default activeNodeType;

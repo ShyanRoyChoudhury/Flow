@@ -1,33 +1,8 @@
-// import BlockSelector from "@/components/BlockSelector";
-// import { outreachBlockViews } from "@/nodes";
 import { QuestionSVG } from "@/SVGs/SVG";
 import BlockSelector from "@/components/BlockSelector";
 import { outreachBlockViews } from "@/nodes";
-// import modalBlockSelected from "@/store/modalBlockSelected";
-// import ModalLeadsFromLists from "@/views/ModalLeadsFromLists";
-// import ModalBaseView from "@/views/ModalBaseViewPage";
-// import { useRecoilValue } from "recoil";
 
 function AddBlockModal() {
-  // const blockSelected = useRecoilValue(modalBlockSelected);
-  // Function to handle block selection
-
-  //   Render the selected block component
-  //   const renderSelectedBlockComponent = () => {
-  //     switch (blockSelected?.title) {
-  //       case "Leads from List(s)":
-  //         return <ModalLeadsFromLists />;
-  //       case "Segment by Events":
-  //         return <ComponentForSegmentByEvents />;
-  //       case "Segment of List":
-  //         return <ComponentForSegmentOfList />;
-  //       case "Lead from CRM Integration":
-  //         return <ComponentForLeadFromCRMIntegration />;
-  //       default:
-  //         return null;
-  //     }
-  //   };
-
   return (
     <div className=" w-full">
       <div className="mx-auto py-4 w-full border-b">

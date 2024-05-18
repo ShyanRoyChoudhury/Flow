@@ -1,10 +1,10 @@
-import { PlusSVG } from "@/SVGs/SVG";
+import { PencilSVG, PlusSVG } from "@/SVGs/SVG";
 import Button from "@/components/Button";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
 import { MenuItem, Select } from "@mui/material";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
-function ModalLeadsFromLists() {
+function ModalColdEmail() {
   const [templateSelected, setTemplateSelected] = useState<string | null>("");
   const handleSelect = (e) => {
     setTemplateSelected(e.target.value);
@@ -13,18 +13,29 @@ function ModalLeadsFromLists() {
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
-        <div className="font-semibold ">Select your List(s)</div>
-        <Button
-          onClick={() => console.log("button click")}
-          className="border-4 px-6 py-2 border-[#05A6FF] text-[#05A6FF] 
+        <div className="font-semibold ">Email Template</div>
+        <div className="flex space-x-2">
+          {templateSelected && (
+            <Button
+              onClick={() => console.log("button click")}
+              className="border-4 px-4 py-2 border-[#05A6FF] text-[#05A6FF] 
+          font-semibold hover:border-blue-400 hover:text-blue-400"
+            >
+              <PencilSVG />
+            </Button>
+          )}
+          <Button
+            onClick={() => console.log("button click")}
+            className="border-4 px-6 py-2 border-[#05A6FF] text-[#05A6FF] 
           font-semibold hover:border-blue-400 hover:text-blue-400 flex
           space-x-2"
-        >
-          <div>New List</div>
-          <div>
-            <PlusSVG />
-          </div>
-        </Button>
+          >
+            <div>New Template</div>
+            <div>
+              <PlusSVG />
+            </div>
+          </Button>
+        </div>
       </div>
       <div className="space-y-2 px-2">
         <Select
@@ -32,12 +43,8 @@ function ModalLeadsFromLists() {
           className="w-full bg-white"
           onChange={handleSelect}
         >
-          <MenuItem value="Sample List" onClick={handleSelect}>
-            Sample List
-          </MenuItem>
-          <MenuItem value="option2" onClick={handleSelect}>
-            Option 2
-          </MenuItem>
+          <MenuItem value="option1">Sample Template</MenuItem>
+          <MenuItem value="option2">Sample Template Followup</MenuItem>
         </Select>
         {templateSelected && (
           <div className="w-full flex justify-end">
@@ -54,4 +61,4 @@ function ModalLeadsFromLists() {
   );
 }
 
-export default ModalLeadsFromLists;
+export default ModalColdEmail;
