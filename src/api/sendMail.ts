@@ -1,13 +1,13 @@
 import axios from "axios"
-
+import {backendURL} from '../lib/config';
 type emailDataType = {
     messageBody: string;
-    Subject: string;
+    subject: string;
     to: string[];
     time: string;
 }
 async function scheduleEmail(emailData: emailDataType){
-    const url=`${process.env.backendURL}/email-schedule`
+    const url=`${backendURL}/email-schedule`
     try{
         const response = await axios.post(url, emailData, {
             headers:{

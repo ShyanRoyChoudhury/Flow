@@ -3,12 +3,26 @@ import Button from "../components/Button";
 import VisualEditor from "../components/VisualEditor";
 import { CrossSVG, PencilSVG, TickSVG } from "@/SVGs/SVG";
 import { useState } from "react";
+import scheduleEmail from "@/api/sendMail";
+import { messageBody, subject } from "@/lib/utils";
+import { useRecoilValue } from "recoil";
+import delayData from "@/store/delayData";
 
 function EditorPage(): JSX.Element {
   const [sequenceName, setSequenceName] = useState<string>("Test Sequence");
   const [isTextBoxActive, setIsTextBoxActive] = useState<boolean>(false);
+  const delay = useRecoilValue(delayData);
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSequenceName(e.target.value);
+  };
+  const handleSubmit = () => {
+    const emailData = {
+      messageBody,
+      subject,
+      to: ["shyan.roy31@gmail.com"],
+      time: `in ${delay.waitTime} seconds`,
+    };
+    console.log(scheduleEmail(emailData));
   };
   return (
     <div>
@@ -44,7 +58,7 @@ function EditorPage(): JSX.Element {
           </div>
           <div>
             <Button
-              onClick={() => console.log("click")}
+              onClick={handleSubmit}
               className="bg-blue-500 border-[#9CBAF8] border-2 text-white flex space-x-1"
             >
               <div>Save & Schedule</div>
