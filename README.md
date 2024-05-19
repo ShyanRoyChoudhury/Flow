@@ -55,7 +55,6 @@ Your backend server should now be running. You can access it at `http://localhos
 ## Additional Information
 
 - Make sure to run the frontend and backend servers simultaneously to have a fully functional application.
-- For any issues or questions, please refer to the project's [issues](https://github.com/your-repo/flow/issues) section.
 
 ## Contributing
 
