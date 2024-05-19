@@ -6,21 +6,29 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/index.js",
-    "build": "tsc -b"
+    "build": "npx prisma generate && tsc -b"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "5.14.0",
     "@types/cors": "^2.8.17",
+    "@types/jsonwebtoken": "^9.0.6",
     "agenda": "^5.0.0",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.13",
+    "prisma": "^5.14.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cookie-parser": "^1.4.7",
     "@types/express": "^4.17.21",
     "@types/nodemailer": "^6.4.15"
   }

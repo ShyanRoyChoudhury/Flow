@@ -1,4 +1,4 @@
-
+import '../config';
 import Agenda  from "agenda"
 const mongoString = process.env.DB_URL as string;
 // import nodemailer from 'nodemailer';
