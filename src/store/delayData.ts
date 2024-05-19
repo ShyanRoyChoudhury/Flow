@@ -9,7 +9,7 @@ const delayData = atom<delayDataProps>({
     key: 'delayData',
     default: {
         waitTime: '',
-        waitTypeSelected: null,
+        waitTypeSelected: '',
     },
 });
 

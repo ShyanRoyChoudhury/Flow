@@ -22,7 +22,13 @@ function EditorPage(): JSX.Element {
       to: ["shyan.roy31@gmail.com"],
       time: `in ${delay.waitTime} seconds`,
     };
-    console.log(scheduleEmail(emailData));
+    scheduleEmail(emailData)
+      .then((response) => {
+        console.log("Email scheduled successfully:", response);
+      })
+      .catch((error) => {
+        console.error("Failed to schedule email:", error);
+      });
   };
   return (
     <div>

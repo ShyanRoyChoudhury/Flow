@@ -1,1 +1,1 @@
-export const backendURL = 'https://flow-kpu0.onrender.com/email-scheduler'
+export const backendURL = 'https://flow-kpu0.onrender.com'
