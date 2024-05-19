@@ -10,7 +10,7 @@ import './config';
 import { authenticateJWT } from "./middleware/auth";
 import cookieParser  from 'cookie-parser';
 
-const secret = process.env.SECRET as string;
+const secret = process.env.SECRET as jwt.Secret;
 const app = express();
 const prisma = PrismaClientManager.getInstance();
 
@@ -98,7 +98,11 @@ app.post('/signin', async (req: Request,res: Response)=>{
                 message: "invalid password"
             });
         }
-
+        if (!secret) {
+            return res.status(500).json({
+                message: "JWT secret is not set"
+            });
+        }
         const token = jwt.sign({userId:user.id}, secret, {expiresIn: '1h'});
         res.cookie('token',token);
         res.json({

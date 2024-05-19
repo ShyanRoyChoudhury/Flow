@@ -11,8 +11,8 @@ interface JobAttributes {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: '26.shyan.roychoudhury@gmail.com',
-        pass: 'clkv zcxp akmt swzi'
+        user: process.env.EMAIL_ID,
+        pass: process.env.EMAIL_PASSWORD
     },
 
 })

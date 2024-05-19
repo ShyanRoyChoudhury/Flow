@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import '../config';
-const secret = process.env.SECRET as string;
+const secret = process.env.SECRET as jwt.Secret;
 
 export const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies['token'];
