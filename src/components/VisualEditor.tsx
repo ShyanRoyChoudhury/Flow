@@ -51,7 +51,6 @@ function VisualEditor() {
     []
   );
   const onNodeClick = (_event: React.MouseEvent, node: Node) => {
-    console.log(node);
     setActiveNodeType(node);
     setModalOpen(true);
   };
@@ -103,7 +102,7 @@ function VisualEditor() {
             type: "step",
           },
         ]);
-        console.log(nodes);
+
         setModalOpen(false); // Close modal after adding node
       }
     },

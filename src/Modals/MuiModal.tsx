@@ -14,13 +14,9 @@ import ModalStartSequence from "./ModalSequenceStart";
 
 function MuiModal() {
   const activeNode = useRecoilValue(activeNodeType);
-  //   const [selectedOption, setSelectedOption] = useState("");
   const [modalOpen, setModalOpen] = useRecoilState(isModalOpen);
   const setActiveNodeType = useSetRecoilState(activeNodeType);
   const setSubModalBlockSelected = useSetRecoilState(activeNodeType);
-  //   const handleOptionChange = (event) => {
-  //     setSelectedOption(event.target.value);
-  //   };
   const [subBlockSelected, setSubBlockSelected] = useRecoilState(
     modalSubBlockSelected
   );

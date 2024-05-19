@@ -19,7 +19,7 @@ function EditorPage(): JSX.Element {
     const emailData = {
       messageBody,
       subject,
-      to: ["shyan.roy31@gmail.com"],
+      to: ["shayan.roy31@gmail.com"],
       time: `in ${delay.waitTime} ${delay.waitTypeSelected}`,
     };
     scheduleEmail(emailData)

@@ -8,7 +8,6 @@ type emailDataType = {
 }
 async function scheduleEmail(emailData: emailDataType){
     const url=`${backendURL}/email-scheduler`
-    console.log(emailData.to)
     try{
         const data = JSON.stringify({
             "time": emailData.time,
