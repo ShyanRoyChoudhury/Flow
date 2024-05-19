@@ -20,7 +20,7 @@ function EditorPage(): JSX.Element {
       messageBody,
       subject,
       to: ["shyan.roy31@gmail.com"],
-      time: `in ${delay.waitTime} seconds`,
+      time: `in ${delay.waitTime} ${delay.waitTypeSelected}`,
     };
     scheduleEmail(emailData)
       .then((response) => {
