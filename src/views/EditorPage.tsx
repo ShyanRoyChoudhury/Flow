@@ -1,4 +1,4 @@
-import MuiModal from "@/MuiModal/MuiModal";
+import MuiModal from "@/Modals/MuiModal";
 import Button from "../components/Button";
 import VisualEditor from "../components/VisualEditor";
 import { CrossSVG, PencilSVG, TickSVG } from "@/SVGs/SVG";

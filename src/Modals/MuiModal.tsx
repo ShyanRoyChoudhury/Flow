@@ -1,15 +1,16 @@
-import AddBlockModal from "@/Modals2/AddBlockModal";
+import AddBlockModal from "./AddBlockModal";
 import isModalOpen from "@/store/isModalOpen";
 import { Modal, Box } from "@mui/material";
 
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useRecoilValue } from "recoil";
 import activeNodeType from "@/store/activeNodeType";
-import SourceBlockModal from "@/Modals2/LeadSourceModal";
+import SourceBlockModal from "./LeadSourceModal";
 import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
 import ModalSubNav from "@/Modals/ModalSubNav";
 import ModalDelay from "@/views/ModalDelay";
 import ModalLeadsFromLists from "@/views/ModalLeadsFromLists";
+import ModalStartSequence from "./ModalSequenceStart";
 
 function MuiModal() {
   const activeNode = useRecoilValue(activeNodeType);
@@ -50,6 +51,8 @@ function MuiModal() {
             <ModalLeadsFromLists />
           </div>
         );
+      case "SequenceStart":
+        return <ModalStartSequence />;
 
       default:
         return <div>Default</div>;

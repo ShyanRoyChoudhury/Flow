@@ -2,6 +2,7 @@ import { PlusSVG } from "@/SVGs/SVG";
 import Button from "@/components/Button";
 import activeNodeType from "@/store/activeNodeType";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
+import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -11,6 +12,7 @@ function ModalLeadsFromLists() {
     setTemplateSelected(e.target.value);
   };
   const addNewNode = useRecoilValue(addNewNodeFunction);
+  const setModalSubBlock = useSetRecoilState(modalSubBlockSelected);
   const setActiveNodeType = useSetRecoilState(activeNodeType);
   return (
     <div className="space-y-2">
@@ -44,6 +46,7 @@ function ModalLeadsFromLists() {
               onClick={() => {
                 addNewNode("LeadsFromList");
                 setActiveNodeType(null);
+                setModalSubBlock(null);
               }}
             >
               Insert
