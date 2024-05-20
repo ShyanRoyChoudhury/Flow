@@ -13,16 +13,18 @@ import cookieParser  from 'cookie-parser';
 const secret = process.env.SECRET as jwt.Secret;
 const app = express();
 const prisma = PrismaClientManager.getInstance();
-
+const corsOptions = {
+    origin: ['http://localhost:5173', 'https://flow-khaki.vercel.app'],
+    credentials: true
+}
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use((_req, res, next)=> {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-      );
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Origin', _req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
     next();
 });
 
