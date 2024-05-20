@@ -35,8 +35,8 @@ function EditorPage() {
       time: `in ${delay.waitTime} ${delay.waitTypeSelected}`,
     };
     scheduleEmail(emailData)
-      .then((response) => {
-        console.log("Email scheduled successfully:", response);
+      .then(() => {
+        console.log("Email scheduled successfully");
       })
       .catch((error) => {
         console.error("Failed to schedule email:", error);

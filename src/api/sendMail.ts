@@ -21,17 +21,19 @@ async function scheduleEmail(emailData: emailDataType){
             maxBodyLength: Infinity,
             url,
             headers: { 
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'authorization': `Bearer ${localStorage.getItem('token')}`
             },
-            data : data
+            data : data,
+            withCredentials: true
           };
           
           return axios.request(config)
           .then((response) => {
-            console.log(JSON.stringify(response.data));
+            return response;
           })
           .catch((error) => {
-            console.log(error);
+            throw new Error(error)
           });
           
 

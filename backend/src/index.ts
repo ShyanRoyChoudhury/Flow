@@ -21,7 +21,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 app.use((_req, res, next)=> {
-    console.log(_req.headers.origin)
+    // console.log(_req.headers.origin)
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Origin', _req.headers.origin);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST');
@@ -58,26 +58,29 @@ app.post('/signup', async (req: Request,res: Response)=>{
     }
     const username = parsedInput.data.username;
     const password = await bcrypt.hash(parsedInput.data.password, 10);
-    
-    const user = await prisma.user.findUnique({
-        where:{
-            username
-        }
-    })
-    if(user?.username === username){
-        res.json({
-            message: "Email already taken / Incorrect inputs"
-        })
-    }else{
-        await prisma.user.create({
-            data:{
-                username,
-                password
+    try{
+        const user = await prisma.user.findUnique({
+            where:{
+                username
             }
         })
-        res.json({
-            message: 'User created successfully'
-        })
+        if(user?.username === username){
+            res.json({
+                message: "Email already taken / Incorrect inputs"
+            })
+        }else{
+            await prisma.user.create({
+                data:{
+                    username,
+                    password
+                }
+            })
+            res.json({
+                message: 'User created successfully'
+            })
+        }
+    }catch(e){
+        console.error(e)
     }
 })
 
