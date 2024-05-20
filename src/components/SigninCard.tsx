@@ -1,6 +1,5 @@
 import signinApi from "@/api/signin";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export function SigninCard({ children }: { children?: React.ReactNode }) {
   const [formData, setFormData] = useState({
@@ -8,7 +7,7 @@ export function SigninCard({ children }: { children?: React.ReactNode }) {
     password: "",
   });
 
-  const navigate = useNavigate()
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -22,7 +21,7 @@ export function SigninCard({ children }: { children?: React.ReactNode }) {
     try{
       const response = await signinApi(formData);
       if(response.data.message === 'Login successful'){
-        navigate('/')
+        window.location.href='/'
       }
     }catch(err){
       console.error('Signin error',err)
@@ -36,7 +35,7 @@ export function SigninCard({ children }: { children?: React.ReactNode }) {
         </div>
         <form className="space-y-8" onSubmit={handleSignIn}>
           <div className="space-y-2">
-            <label>username</label>
+            <label className="font-semibold">Username</label>
             <input
               name="username"
               value={formData.username}
@@ -46,7 +45,7 @@ export function SigninCard({ children }: { children?: React.ReactNode }) {
           </div>
 
           <div className="space-y-2">
-            <label>Password</label>
+            <label className="font-semibold">Password</label>
             <input
               name="password"
               value={formData.password}

@@ -135,6 +135,28 @@ app.post('/email-scheduler', authenticateJWT, async (req: Request, res: Response
     });
 })
 
+app.get('/validate-token', (req: Request, res: Response)=>{
+    const authHeader = req.headers.authorization as string;
+    if(authHeader){
+        const token = authHeader.split(' ')[1];
+        try{
+            const decoded = jwt.verify(token, secret);
+            if(decoded){
+                return res.json({
+                    message: 'verified'
+                })
+            }
+            else{
+                throw new Error('token error')
+            }
+        }catch(error){
+            return res.json({
+                message: 'Unauthorised'
+            })
+        }
+        
+    }
+})
 
 app.listen(PORT, ()=>{
     console.log(`server running on ${PORT}`)

@@ -2,16 +2,28 @@ import MuiModal from "@/Modals/MuiModal";
 import Button from "../components/Button";
 import VisualEditor from "../components/VisualEditor";
 import { CrossSVG, PencilSVG, TickSVG } from "@/SVGs/SVG";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import scheduleEmail from "@/api/sendMail";
 import { messageBody, subject } from "@/lib/utils";
 import { useRecoilValue } from "recoil";
 import delayData from "@/store/delayData";
+import useAuth from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
-function EditorPage(): JSX.Element {
+function EditorPage() {
   const [sequenceName, setSequenceName] = useState<string>("Test Sequence");
   const [isTextBoxActive, setIsTextBoxActive] = useState<boolean>(false);
   const delay = useRecoilValue(delayData);
+  const navigate = useNavigate();
+
+  const isAuthenticated = useAuth();
+  useEffect(()=>{
+    
+    if(!isAuthenticated){
+      navigate('/signin')
+    }
+  }, [isAuthenticated]);
+
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSequenceName(e.target.value);
   };
