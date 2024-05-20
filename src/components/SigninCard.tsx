@@ -50,6 +50,7 @@ export function SigninCard({ children }: { children?: React.ReactNode }) {
             <label className="font-semibold">Password</label>
             <input
               name="password"
+              type="password"
               value={formData.password}
               onChange={handleChange}
               className="text-black w-full outline-blue-400 p-1.5 rounded-md border"

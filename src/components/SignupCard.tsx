@@ -48,6 +48,7 @@ export function SignupCard({ children }: { children?: React.ReactNode }) {
             <label>Password</label>
             <input
               name="password"
+              type="password"
               value={formData.password}
               onChange={handleChange}
               className="text-black w-full outline-blue-400 p-1.5 rounded-md border"

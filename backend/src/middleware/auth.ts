@@ -6,7 +6,6 @@ const secret = process.env.SECRET as jwt.Secret;
 export const authenticateJWT = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.headers['authorization'];
     const token = authHeader?.split(' ')[1]
-    console.log(token)
     if(token){
         const decoded = jwt.verify(token, secret) as JwtPayload;
         if(decoded && decoded.userId){

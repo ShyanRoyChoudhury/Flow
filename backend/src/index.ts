@@ -9,6 +9,7 @@ import jwt from 'jsonwebtoken'
 import './config';
 import { authenticateJWT } from "./middleware/auth";
 import cookieParser  from 'cookie-parser';
+import { limiter } from "./utils/rateLimiter";
 
 const secret = process.env.SECRET as jwt.Secret;
 const app = express();
@@ -28,7 +29,7 @@ app.use((_req, res, next)=> {
     res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
     next();
 });
-
+app.use(limiter);
 
 const PORT = process.env.PORT || 3000;
 
