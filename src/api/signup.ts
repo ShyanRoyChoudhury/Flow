@@ -7,7 +7,7 @@ type signupDataType = {
 }
 
 async function signupApi(signInData: signupDataType){
-    const url=`${backendURL}/signin`;
+    const url=`${backendURL}/signup`;
     const data = JSON.stringify({
       "username": signInData.username,
       "password": signInData.password
@@ -25,10 +25,11 @@ async function signupApi(signInData: signupDataType){
     
     return axios.request(config)
     .then((response) => {
-      console.log(JSON.stringify(response.data));
+      return response;
     })
     .catch((error) => {
       console.log(error);
+      throw error;
     });
 
 }

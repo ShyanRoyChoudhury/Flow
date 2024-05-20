@@ -17,10 +17,11 @@ const corsOptions = {
     origin: ['http://localhost:5173', 'https://flow-khaki.vercel.app'],
     credentials: true
 }
-app.use(express.json());
 app.use(cors(corsOptions));
+app.use(express.json());
 app.use(cookieParser());
 app.use((_req, res, next)=> {
+    console.log(_req.headers.origin)
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Origin', _req.headers.origin);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST');
@@ -57,17 +58,23 @@ app.post('/signup', async (req: Request,res: Response)=>{
     }
     const username = parsedInput.data.username;
     const password = await bcrypt.hash(parsedInput.data.password, 10);
-    const user = await prisma.user.create({
-        data:{
-            username,
-            password
+    
+    const user = await prisma.user.findUnique({
+        where:{
+            username
         }
     })
-    if(!user){
+    if(user?.username === username){
         res.json({
             message: "Email already taken / Incorrect inputs"
         })
     }else{
+        await prisma.user.create({
+            data:{
+                username,
+                password
+            }
+        })
         res.json({
             message: 'User created successfully'
         })
@@ -106,9 +113,10 @@ app.post('/signin', async (req: Request,res: Response)=>{
             });
         }
         const token = jwt.sign({userId:user.id}, secret, {expiresIn: '1h'});
-        res.cookie('token',token);
+        
         res.json({
-            message: 'Login successful'
+            message: 'Login successful',
+            token
         });
     }
 })

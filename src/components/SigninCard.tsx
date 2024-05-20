@@ -1,11 +1,15 @@
 import signinApi from "@/api/signin";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function SigninCard({ children }: { children?: React.ReactNode }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
+  const navigate = useNavigate()
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -13,8 +17,16 @@ export function SigninCard({ children }: { children?: React.ReactNode }) {
       [name]: value,
     }));
   };
-  const handleSignIn = async () => {
-    await signinApi(formData);
+  const handleSignIn = async (event: React.ChangeEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    try{
+      const response = await signinApi(formData);
+      if(response.data.message === 'Login successful'){
+        navigate('/')
+      }
+    }catch(err){
+      console.error('Signin error',err)
+    }
   };
   return (
     <div className=" p-4 lg:mt-16  w-full rounded-md h-5/6 bg-white text-[#3C4257] shadow-xl">
@@ -22,7 +34,7 @@ export function SigninCard({ children }: { children?: React.ReactNode }) {
         <div className="px-4 py-8 font-semibold text-2xl">
           Login your SalesBlink Account
         </div>
-        <form className="space-y-8">
+        <form className="space-y-8" onSubmit={handleSignIn}>
           <div className="space-y-2">
             <label>username</label>
             <input
@@ -44,10 +56,10 @@ export function SigninCard({ children }: { children?: React.ReactNode }) {
           </div>
           <div className="pt-4">
             <button
-              onClick={handleSignIn}
-              className="focus:outline-none w-full py-4 bg-[#635BFF] rounded-md"
+              type="submit"
+              className="focus:outline-none text-white font-semibold w-full py-4 bg-[#635BFF] rounded-md"
             >
-              Signin
+              Sign in
             </button>
           </div>
         </form>
