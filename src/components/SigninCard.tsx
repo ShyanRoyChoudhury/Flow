@@ -1,13 +1,14 @@
 import signinApi from "@/api/signin";
 import { useState } from "react";
-
 export function SigninCard({ children }: { children?: React.ReactNode }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
-
-  
+  const [guestData, ] = useState({
+    username: "Guest",
+    password: "guestpassword",
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -21,6 +22,7 @@ export function SigninCard({ children }: { children?: React.ReactNode }) {
     try{
       const response = await signinApi(formData);
       if(response.data.message === 'Login successful'){
+        localStorage.setItem('username', formData.username);
         window.location.href='/'
       }
     }catch(err){
@@ -62,6 +64,22 @@ export function SigninCard({ children }: { children?: React.ReactNode }) {
             </button>
           </div>
         </form>
+            <button
+              className="focus:outline-none text-white font-semibold w-full py-4 bg-[#635BFF] rounded-md"
+              onClick={async()=>{
+                try{
+                  const response = await signinApi(guestData);
+                  if(response.data.message === 'Login successful'){
+                    localStorage.setItem('username', guestData.username);
+                    window.location.href='/'
+                  }
+                }catch(err){
+                  console.error('Signin error',err)
+                }
+              }}
+            >
+              Sign in as guest
+            </button>
         <div className="text-sm flex justify-center space-x-1">
           <div>Have an account?</div>
           <a href="signup" className="text-blue-700 hover:text-black">

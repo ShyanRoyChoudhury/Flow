@@ -5,5 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export const messageBody = 'Message body. TEST';
-export const subject = 'Test Subject';
+
+
+export const messageBody='Message body';
+export const subject="Email Subject";

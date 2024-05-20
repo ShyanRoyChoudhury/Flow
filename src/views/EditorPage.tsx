@@ -9,6 +9,7 @@ import { useRecoilValue } from "recoil";
 import delayData from "@/store/delayData";
 import useAuth from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { toast } from "@/components/ui/use-toast";
 
 function EditorPage() {
   const [sequenceName, setSequenceName] = useState<string>("Test Sequence");
@@ -36,7 +37,10 @@ function EditorPage() {
     };
     scheduleEmail(emailData)
       .then(() => {
-        console.log("Email scheduled successfully");
+        toast({
+          title: 'Email Successfully Scheduled',
+          description: 'The email has been scheduled as requested.'
+        });
       })
       .catch((error) => {
         console.error("Failed to schedule email:", error);
