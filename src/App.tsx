@@ -15,9 +15,13 @@ function App() {
   const serverRunning = useRecoilValue(serverState)
   return (
     <div className="">
-      <div className={cn(`${!serverRunning ?'bg-opacity-80 bg-[#000f0a] z-10':''} fixed top-0 left-0 w-full h-full flex justify-center items-center`)}>
-                 {!serverRunning && <AlertBox/> }
-      </div>
+      
+        {!serverRunning && (
+          <div className={cn(`${!serverRunning ?'bg-opacity-80 bg-[#000f0a] z-10':''} fixed top-0 left-0 w-full h-full flex justify-center items-center`)}>
+            <AlertBox/> 
+          </div>
+          )
+        }
       <Router>
         <Routes>
           <Route path="/" element={<EditorPage />} />
