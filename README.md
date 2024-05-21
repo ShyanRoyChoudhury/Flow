@@ -40,12 +40,24 @@ Your frontend development server should now be running. You can access it at `ht
     yarn install
     ```
 
-3. **Build the project:**
+3. **Create a .env file:**
+    ```bash
+    cp .env.example .env
+    ```
+     - create a mongodb database for prisma.
+     - Get the connection string and use it in .env 
+     - A separate db  for agenda or you can set up a local db running in docker for agenda.
+           ```bash
+           docker run --name agenda-db -d -p 27017:27017 mongo
+           ```.
+     - set ``basDB_URL=`mongodb:://127.0.0.1/agenda`` in .env
+
+4. **Build the project:**
     ```bash
     yarn build
     ```
 
-4. **Start the backend server:**
+5. **Start the backend server:**
     ```bash
     yarn start
     ```
