@@ -1,4 +1,4 @@
-import MuiModal from "@/Modals/MuiModal";
+import MainModal from "@/Modals/Modal";
 import Button from "../components/Button";
 import VisualEditor from "../components/VisualEditor";
 import { CrossSVG, PencilSVG, TickSVG } from "@/SVGs/SVG";
@@ -10,6 +10,7 @@ import delayData from "@/store/delayData";
 import useAuth from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
+import Modal2 from "@/Modals/Modal2";
 
 function EditorPage() {
   const [sequenceName, setSequenceName] = useState<string>("Test Sequence");
@@ -23,7 +24,7 @@ function EditorPage() {
     if(!isAuthenticated){
       navigate('/signin')
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSequenceName(e.target.value);
@@ -92,7 +93,8 @@ function EditorPage() {
 
         <VisualEditor />
       </div>
-      <MuiModal />
+      <MainModal />
+      <Modal2 />
     </div>
   );
 }

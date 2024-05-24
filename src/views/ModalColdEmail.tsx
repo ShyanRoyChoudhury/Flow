@@ -1,6 +1,7 @@
 import { PencilSVG, PlusSVG } from "@/SVGs/SVG";
 import Button from "@/components/Button";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
+import isEditModalOpen from "@/store/isEditModalOpen";
 import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { useState } from "react";
@@ -12,6 +13,8 @@ function ModalColdEmail() {
   };
   const addNewNode = useRecoilValue(addNewNodeFunction);
   const setSubBlockSelected = useSetRecoilState(modalSubBlockSelected);
+  const setEditModalSelected = useSetRecoilState(isEditModalOpen);
+
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
@@ -27,7 +30,7 @@ function ModalColdEmail() {
             </Button>
           )}
           <Button
-            onClick={() => console.log("button click")}
+            onClick={() => setEditModalSelected(true)}
             className="border-4 px-6 py-2 border-[#05A6FF] text-[#05A6FF] 
           font-semibold hover:border-blue-400 hover:text-blue-400 flex
           space-x-2"

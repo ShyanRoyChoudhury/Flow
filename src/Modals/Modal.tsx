@@ -11,8 +11,9 @@ import ModalSubNav from "@/Modals/ModalSubNav";
 import ModalDelay from "@/views/ModalDelay";
 import ModalLeadsFromLists from "@/views/ModalLeadsFromLists";
 import ModalStartSequence from "./ModalSequenceStart";
+import ModalColdEmail from "@/views/ModalColdEmail";
 
-function MuiModal() {
+function MainModal() {
   const activeNode = useRecoilValue(activeNodeType);
   const [modalOpen, setModalOpen] = useRecoilState(isModalOpen);
   const setActiveNodeType = useSetRecoilState(activeNodeType);
@@ -49,7 +50,10 @@ function MuiModal() {
         );
       case "SequenceStart":
         return <ModalStartSequence />;
-
+      
+      case "EmailBlock":
+        return <ModalColdEmail />;
+      
       default:
         return <div>Default</div>;
     }
@@ -69,7 +73,7 @@ function MuiModal() {
     >
       <Box
         className="rounded-xl shadow p-6 transition-all  
-          w-5/6 xl:w-4/6 py-8 h-5/6 bg-[#F2F2F2] relative"
+          w-5/6 xl:w-4/6 py-8 h-5/6 bg-[#F2F2F2] relative overflow-y-auto"
       >
         <button
           className="absolute top-2 right-2 p-[0.5px] px-2 
@@ -92,4 +96,4 @@ function MuiModal() {
   );
 }
 
-export default MuiModal;
+export default MainModal;

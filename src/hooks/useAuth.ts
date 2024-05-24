@@ -4,7 +4,7 @@ import axios from 'axios';
 import { backendURL } from '@/lib/config';
 
 const useAuth = () => {
-    let [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
