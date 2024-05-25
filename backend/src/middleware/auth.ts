@@ -9,6 +9,7 @@ export const authenticateJWT = (req: Request, res: Response, next: NextFunction)
     if(token){
         const decoded = jwt.verify(token, secret) as JwtPayload;
         if(decoded && decoded.userId){
+            req.headers['userId'] = decoded.userId;
             next()
         }else{
             res.status(433).json({

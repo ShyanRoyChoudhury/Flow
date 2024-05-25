@@ -14,7 +14,20 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  username String @unique
-  password String 
+  id              String @id @default(auto()) @map("_id") @db.ObjectId
+  username        String 
+  password        String
+  emailTemplates  EmailTemplate[] @relation("UserEmailTemplate")
+
+  @@unique([username])
+}
+
+model EmailTemplate {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  title     String 
+  subject   String
+  body      String
+  userId    String @db.ObjectId
+  User      User @relation(fields: [userId], references: [id], name: "UserEmailTemplate")
+  @@unique([title])
 }

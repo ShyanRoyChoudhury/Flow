@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import { agenda } from "./utils/agenda";
 import './jobs/sendMail';
-import { z } from "zod";
 import cors from 'cors';
 import { PrismaClientManager } from "./prisma";
 import bcrypt from 'bcrypt'
@@ -10,6 +9,7 @@ import './config';
 import { authenticateJWT } from "./middleware/auth";
 import cookieParser  from 'cookie-parser';
 import { limiter } from "./utils/rateLimiter";
+import { emailObject, emailTemplateObject, signupObject } from './schema';
 
 const secret = process.env.SECRET as jwt.Secret;
 const app = express();
@@ -33,21 +33,7 @@ app.use(limiter);
 
 const PORT = process.env.PORT || 3000;
 
-const emailObject = z.object({
-    time: z.string(),
-    text: z.string(),
-    subject: z.string(),
-    to: z.string().array()
-})
 
-const signupObject = z.object({
-    username: z.string({
-            required_error: "username is required",
-    }).min(4),
-    password: z.string({
-        required_error: "password is required"
-    }).min(4)
-})
 
 app.post('/signup', async (req: Request,res: Response)=>{
     const parsedInput = signupObject.safeParse(req.body);
@@ -159,6 +145,36 @@ app.get('/validate-token', (req: Request, res: Response)=>{
             })
         }
         
+    }
+})
+
+app.post('/addEmailTemplate', authenticateJWT, async (req: Request, res: Response)=>{
+    const parsedInput = emailTemplateObject.safeParse(req.body);
+    if(!parsedInput.success){
+        res.status(400).json({
+            message: parsedInput.error
+        })
+    }
+
+    try{
+        const userId = req.headers['userId'] as string;
+        if(parsedInput.data?.emailBody && parsedInput.data.emailSubject && parsedInput.data.templateName){
+            await prisma.emailTemplate.create({
+                data:{
+                    subject: parsedInput.data?.emailSubject,
+                    body: parsedInput.data.emailBody,
+                    title: parsedInput.data.templateName,
+                    userId
+                },
+            });
+            res.json({
+                message: 'Email Template successfully stored'
+            })
+        }
+    }catch(e){
+        res.status(400).json({
+            message: 'Error adding Email Template'
+        })
     }
 })
 

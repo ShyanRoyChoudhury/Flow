@@ -19,14 +19,14 @@ function Modal2() {
         className="rounded-xl shadow p-6 transition-all  outline-none 
           w-11/12   py-8 min-h-5/6 max-h-screen bg-[#F2F2F2] relative overflow-y-auto"
       >
-        <button
+        {/* <button
           className="absolute top-2 right-2 p-[0.5px] px-2 
           rounded-sm  border-red-600 text-red-600 border-[3px]  hover:text-red-400 
           hover:border-red-400 transition-colors"
           onClick={closeModal}
         >
           X
-        </button>
+        </button> */}
         <div className="border-b-2 w-full p-2 "></div>
         <EditTemplate />
       </Box>

@@ -18,7 +18,7 @@ function ModalColdEmail() {
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
-        <div className="font-semibold ">Email Template</div>
+        <div className="font-bold">Email Template</div>
         <div className="flex space-x-2">
           {templateSelected && (
             <Button
