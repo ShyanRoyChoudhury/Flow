@@ -2,6 +2,7 @@ import { PencilSVG, PlusSVG } from "@/SVGs/SVG";
 import getEmailTemplates from "@/api/getEmailTemplates";
 import Button from "@/components/Button";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
+import editModalType from "@/store/editModalTypes";
 import emailData from "@/store/emailData";
 import isEditModalOpen from "@/store/isEditModalOpen";
 import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
@@ -22,6 +23,7 @@ function ModalColdEmail() {
   const addNewNode = useRecoilValue(addNewNodeFunction);
   const setSubBlockSelected = useSetRecoilState(modalSubBlockSelected);
   const setEditModalSelected = useSetRecoilState(isEditModalOpen);
+  const setEditModalTypeSelected = useSetRecoilState(editModalType);
   const setEmailData = useSetRecoilState(emailData);
 
   useEffect(() => {
@@ -34,7 +36,6 @@ function ModalColdEmail() {
   
   const handleSelect = (e: SelectChangeEvent<string>) => {
     const selectedTemplate = templates.find(tmp => tmp.id === e.target.value);
-    console.log(selectedTemplate)
     if (selectedTemplate) {
       setTemplateSelected(selectedTemplate);
       setEmailData({
@@ -44,7 +45,6 @@ function ModalColdEmail() {
     } else {
       setTemplateSelected(null);
     }
-    console.log(templateSelected);
   };
   
   return (
@@ -54,7 +54,10 @@ function ModalColdEmail() {
         <div className="flex space-x-2">
           {templateSelected && (
             <Button
-              onClick={() => console.log("button click")}
+              onClick={() => {
+                setEditModalSelected(true)
+              setEditModalTypeSelected("editMode")
+              }}
               className="border-4 px-4 py-2 border-[#05A6FF] text-[#05A6FF] 
           font-semibold hover:border-blue-400 hover:text-blue-400"
             >
@@ -62,7 +65,10 @@ function ModalColdEmail() {
             </Button>
           )}
           <Button
-            onClick={() => setEditModalSelected(true)}
+            onClick={() => {
+              setEditModalSelected(true)
+              setEditModalTypeSelected("addMode")
+              }}
             className="border-4 px-6 py-2 border-[#05A6FF] text-[#05A6FF] 
           font-semibold hover:border-blue-400 hover:text-blue-400 flex
           space-x-2"

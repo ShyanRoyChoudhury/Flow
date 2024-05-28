@@ -37,7 +37,6 @@ function EditorPage() {
       to: ["shayan.roy31@gmail.com"],
       time: `in ${delay.waitTime} ${delay.waitTypeSelected}`,
     };
-    console.log(emailData)
     scheduleEmail(emailData)
       .then(() => {
         toast({

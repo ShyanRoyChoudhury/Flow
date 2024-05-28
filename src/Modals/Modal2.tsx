@@ -1,4 +1,6 @@
+import editModalType from "@/store/editModalTypes";
 import isEditModalOpen from "@/store/isEditModalOpen";
+import AddNewTemplate from "@/views/AddNewTemplate";
 import EditTemplate from "@/views/EditTemplate";
 import { Modal, Box } from "@mui/material";
 
@@ -6,8 +8,10 @@ import { useRecoilState } from "recoil";
 
 function Modal2() {
   const [editModalOpen, setEditModalOpen] = useRecoilState(isEditModalOpen)
+  const [currentEditModalType, setCurrentEditModalType ]  = useRecoilState(editModalType)
   const closeModal = () => {
     setEditModalOpen(false);
+    setCurrentEditModalType(null);
   }
   return (
     <Modal
@@ -28,7 +32,12 @@ function Modal2() {
           X
         </button> */}
         <div className="border-b-2 w-full p-2 "></div>
-        <EditTemplate />
+        {currentEditModalType==="addMode"?(
+        <AddNewTemplate />
+        ): 
+        (
+          <EditTemplate />
+        )}
       </Box>
     </Modal>
   );

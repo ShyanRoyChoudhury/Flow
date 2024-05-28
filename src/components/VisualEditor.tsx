@@ -30,9 +30,7 @@ const initialNodes = [
   },
 ] satisfies Node[];
 
-const initialEdges = [
-  // { id: "testedge", type: "step", source: "2", target: "3" },
-] satisfies Edge[];
+const initialEdges = [] satisfies Edge[];
 function VisualEditor() {
   const setModalOpen = useSetRecoilState(isModalOpen);
   const [activeNode, setActiveNodeType] = useRecoilState(activeNodeType);
@@ -40,6 +38,9 @@ function VisualEditor() {
 
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
+
+  // console.log(edges)
+  // console.log(nodes)
   const onNodesChange = useCallback(
     //@ts-expect-error typeerror to be fixed
     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
@@ -96,7 +97,7 @@ function VisualEditor() {
         setEdges((eds) => [
           ...eds,
           {
-            id: `edge-${activeNode.id}-${newNodeId}`,
+            id: `edge-${lastNodeId.toString()}-${newNodeId}`,
             source: lastNodeId.toString(),
             target: newNodeId,
             type: "step",

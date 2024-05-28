@@ -1,5 +1,6 @@
-import addEmailTemplate from "@/api/addEmailTemplate";
+// import addEmailTemplate from "@/api/addEmailTemplate";
 import Editor from "@/components/Editor";
+import emailData from "@/store/emailData";
 import isEditModalOpen from "@/store/isEditModalOpen";
 import { ChangeEvent, useState } from "react";
 import { useSetRecoilState } from "recoil";
@@ -9,6 +10,7 @@ interface emailTemplateType {
     emailBody: string
 }
 function EditTemplate(){
+    const setEmailData = useSetRecoilState(emailData);
     const [ emailTemplate, setEmailTemplate ] = useState<emailTemplateType>({
         templateName: '',
     emailSubject: '',
@@ -21,7 +23,6 @@ function EditTemplate(){
             ...prev,
             [e.target.name]: [e.target.value].toString()
         }))
-        // console.log('Template change:', emailTemplate)
     }
 
     const handleEditorChange = (value: string) => {
@@ -32,7 +33,11 @@ function EditTemplate(){
     }
     const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        await addEmailTemplate(emailTemplate)
+        // await addEmailTemplate(emailTemplate)
+        setEmailData({
+            messageBody: emailTemplate.emailBody,
+            subject: emailTemplate.emailSubject         // will add update template functionality later
+          })
     }
 
     const setEditModalOpen = useSetRecoilState(isEditModalOpen)
@@ -79,7 +84,7 @@ function EditTemplate(){
                             font-bold flex space-x-1"
                             onClick={handleSubmit}
                             >
-                                Add Email Template
+                                Update Email Template
                             </button>
                         </div>
                     </div>

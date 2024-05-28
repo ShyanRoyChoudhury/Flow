@@ -20,11 +20,11 @@ interface JobAttributes {
 
 agenda.define('send-email', async(job: Job<JobAttributes>, done)=>{
     const {subject, to, text} = job.attrs.data;
-    await transporter.sendMail({to, subject, text}, (error, info)=>{
+    await transporter.sendMail({to, subject, text}, (error,)=>{
         if(error instanceof Error){
             throw new Error(error.message)
         }
-        console.log('info:', info)
+        // console.log('info:', info)
     })
     done()
 })
