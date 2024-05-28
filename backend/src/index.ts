@@ -178,6 +178,33 @@ app.post('/addEmailTemplate', authenticateJWT, async (req: Request, res: Respons
     }
 })
 
+app.get('/getEmailTemplates', authenticateJWT, async (req: Request, res: Response)=>{
+    const userId:string = req.headers.userId as string;
+    try{
+        const templates = await prisma.emailTemplate.findMany({
+            where:{
+                userId
+            },
+            select:{
+                title: true,
+                body: true,
+                subject: true,
+                id: true
+            }
+        })
+        
+        if(!templates){
+            throw new Error('No templates found')
+        }
+
+        res.json({
+            templates
+        }) 
+    }catch(e){
+        res.json({error:e})
+    }
+})
+
 app.listen(PORT, ()=>{
     console.log(`server running on ${PORT}`)
 })

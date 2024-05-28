@@ -4,19 +4,20 @@ import VisualEditor from "../components/VisualEditor";
 import { CrossSVG, PencilSVG, TickSVG } from "@/SVGs/SVG";
 import { useEffect, useState } from "react";
 import scheduleEmail from "@/api/sendMail";
-import { messageBody, subject } from "@/lib/utils";
 import { useRecoilValue } from "recoil";
 import delayData from "@/store/delayData";
 import useAuth from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
 import Modal2 from "@/Modals/Modal2";
+import emailData from "@/store/emailData";
 
 function EditorPage() {
   const [sequenceName, setSequenceName] = useState<string>("Test Sequence");
   const [isTextBoxActive, setIsTextBoxActive] = useState<boolean>(false);
   const delay = useRecoilValue(delayData);
   const navigate = useNavigate();
+  const emailContents = useRecoilValue(emailData);
 
   const isAuthenticated = useAuth();
   useEffect(()=>{
@@ -31,11 +32,12 @@ function EditorPage() {
   };
   const handleSubmit = () => {
     const emailData = {
-      messageBody,
-      subject,
+      messageBody: emailContents?.messageBody as string,
+      subject: emailContents?.subject as string,
       to: ["shayan.roy31@gmail.com"],
       time: `in ${delay.waitTime} ${delay.waitTypeSelected}`,
     };
+    console.log(emailData)
     scheduleEmail(emailData)
       .then(() => {
         toast({

@@ -29,8 +29,6 @@ function EditTemplate(){
             ...prev,
             emailBody: value
         }))
-        console.log('editor change:', emailTemplate)
-        console.log('body:',emailTemplate.emailBody)
     }
     const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();

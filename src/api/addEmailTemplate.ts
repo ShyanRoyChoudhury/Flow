@@ -1,3 +1,4 @@
+import { backendURL } from "@/lib/config";
 import axios from "axios";
 
 interface emailTemplateType{
@@ -13,10 +14,12 @@ function addEmailTemplate(emailTemplate: emailTemplateType) {
     emailBody: emailTemplate.emailBody,
   });
 
+  const url=`${backendURL}/addEmailTemplate`;
+  
   const config = {
     method: "post",
     maxBodyLength: Infinity,
-    url: "http://localhost:3000/addEmailTemplate",
+    url,
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",

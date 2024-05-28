@@ -7,5 +7,5 @@ export function cn(...inputs: ClassValue[]) {
 
 
 
-export const messageBody='Message body';
-export const subject="Email Subject";
+// export const messageBody='Message body';
+// export const subject="Email Subject";

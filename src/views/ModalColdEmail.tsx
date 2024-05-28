@@ -1,20 +1,52 @@
 import { PencilSVG, PlusSVG } from "@/SVGs/SVG";
+import getEmailTemplates from "@/api/getEmailTemplates";
 import Button from "@/components/Button";
 import addNewNodeFunction from "@/store/addNewNodeFunction";
+import emailData from "@/store/emailData";
 import isEditModalOpen from "@/store/isEditModalOpen";
 import { modalSubBlockSelected } from "@/store/modalSubBlockSelected";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+
+type emailTemplateType = {
+  title: string,
+  body: string,
+  subject: string,
+  id: string
+}
+
 function ModalColdEmail() {
-  const [templateSelected, setTemplateSelected] = useState<string | null>("");
-  const handleSelect = (e: SelectChangeEvent<string | null>) => {
-    setTemplateSelected(e.target.value);
-  };
+  const [templates, setTemplates] = useState<emailTemplateType[]>([]);
+  const [templateSelected, setTemplateSelected] = useState<emailTemplateType | null>(null);
   const addNewNode = useRecoilValue(addNewNodeFunction);
   const setSubBlockSelected = useSetRecoilState(modalSubBlockSelected);
   const setEditModalSelected = useSetRecoilState(isEditModalOpen);
+  const setEmailData = useSetRecoilState(emailData);
 
+  useEffect(() => {
+    const fetchTemplates = async () => {
+      const temp = await getEmailTemplates();
+      setTemplates(temp);
+    }
+    fetchTemplates();
+  }, []);
+  
+  const handleSelect = (e: SelectChangeEvent<string>) => {
+    const selectedTemplate = templates.find(tmp => tmp.id === e.target.value);
+    console.log(selectedTemplate)
+    if (selectedTemplate) {
+      setTemplateSelected(selectedTemplate);
+      setEmailData({
+        messageBody: selectedTemplate.body,
+        subject: selectedTemplate.subject
+      });
+    } else {
+      setTemplateSelected(null);
+    }
+    console.log(templateSelected);
+  };
+  
   return (
     <div className="space-y-2">
       <div className="flex justify-between items-center">
@@ -44,12 +76,13 @@ function ModalColdEmail() {
       </div>
       <div className="space-y-2 px-2">
         <Select
-          value={templateSelected}
+          value={templateSelected?.id || ""}
           className="w-full bg-white"
           onChange={handleSelect}
         >
-          <MenuItem value="option1">Sample Template</MenuItem>
-          <MenuItem value="option2">Sample Template Followup</MenuItem>
+          {templates.map((tmp) => (
+            <MenuItem key={tmp.id} value={tmp.id}>{tmp.title}</MenuItem>
+          ))}
         </Select>
         {templateSelected && (
           <div className="w-full flex justify-end">
